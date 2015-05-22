@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@section head{
+<link href="~/Content/Styles/Admin/index.css" rel="stylesheet" />
+    }
+@{var loginInfo = Sun.Core.Login.LoginFac.Admin.GetLoginInfo(); int MenuType = 0;}
+<body id="layout" data-menus="@ViewData["menus"]" data-menutype="@MenuType">
+    <div region="north" split="true" style="height:@(MenuType==0?94:60)px;overflow:hidden;background-color:#7f8ee8;">
+        @if (MenuType == 1)
+            {
+                <div id="topmenuwrap" style="float:left;padding:5px;"></div>
+                <div style="height:55px;float:right;margin-top:20px;">
+                    <div class="wz" style="font-size:14px;"><span style="font-size:16px;color:#cb1b4b;">@loginInfo.NickName</span><a href="#" class="easyui-linkbutton" iconcls="icon-updatePwd" onclick="openUpdatePass()">修改密码</a><a href="#" class="easyui-linkbutton" iconcls="icon-logout" style="margin-left:10px;" id="loginOut">安全退出</a></div>
+                </div> 
+            }
+            else
+            {
+                <div class="top">
+                <img src="@CustomConfig.LogoUrl?q=100" />
+                <div class="top_right">
+                    <div id="clocktime" class="clock"></div>
+                    <div class="wz"><u>@loginInfo.OrganId=>@loginInfo.NickName</u>　|　<a href="#" class="easyui-linkbutton" iconcls="icon-updatePwd" onclick="openUpdatePass()">修改密码</a>　|　<a href="#" class="easyui-linkbutton" iconcls="icon-logout" id="loginOut">安全退出</a></div>
+                </div>
+            </div>
+            }
+    </div>
+    <div region="south" split="true" style="height:30px;text-align:center;font-size:15px;color:#0689e3;">
+        <span>@(CustomConfig.WebName)【@loginInfo.OrganId】管理中心</span><span id="clocktime" style="font-size:14px;"></span>
+    </div>
+    @if(MenuType==0)
+    { 
+    <div region="west" split="true" title="菜单导航" style="width:200px;">
+        <div id="menus">
+        </div>
+    </div>
+    }
+    <div id="center" region="center">
+        <div id="tabs">
+            <div id="workcenter" title="工作中心" data-options="tools:'#tab-tools'">
+                <iframe id="mainFrame" name="mainFrame" style="overflow:hidden;border:none;width:100%;height:99%" scrolling=no src=""></iframe>
+            </div>
+        </div>
+    </div>
+    <div id="tab-tools">
+        <a href="javascript:void(0)" class="icon-mini-refresh" onclick="refresh()"></a>
+    </div>
+
+    <div id="tabsMenu" class="easyui-menu" style="width:150px;">
+        <div id="close">关闭</div>
+        <div id="closeall">全部关闭</div>
+        <div id="closeother">除此之外全部关闭</div>
+        <div class="menu-sep"></div>
+        <div id="closeright">当前页右侧全部关闭</div>
+        <div id="closeleft">当前页左侧全部关闭</div>
+    </div>
+
+    <div class="easyui-dialog" id="updatePassword" style="padding:10px 10px;width:310px;">
+        <form id="passwordEdit" method="post">
+            <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+                <tr>
+                    <td>新密码</td>
+                    <td><input style="width:210px;" type="password" id="txtPassword" name="password" class="easyui-validatebox" required="true"></td>
+                </tr>
+                <tr>
+                    <td>新密码</td>
+                    <td><input style="width:210px;" type="password" id="txtRePassword" name="rePassword" class="easyui-validatebox" required="true"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+<script src="~/Content/Scripts/Admin/index.js"></script>

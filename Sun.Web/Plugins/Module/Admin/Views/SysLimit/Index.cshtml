@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@section head{
+    <script type="text/javascript">
+        var limitsStr = '@ViewData["limitsStr"]';
+        var Limits = limitsStr.split(',');
+    </script>
+}
+<body style="width:99%;height:99%;">
+    <table id="List"></table>
+    <div class="easyui-dialog" id="AddorUpdate" style="padding:10px 10px;width:590px;">
+        <div class="ftitle">权限信息</div>
+        <form id="edit" method="post">
+            <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+                <tr><input type="hidden" name="LimitId" /></tr>
+                <tr>
+                    <td>所属模块</td>
+                    <td><input style="width:206px;" id="ModuleId" class="easyui-combotree" name="ModuleId" data-options="required:true"> </td>
+                    <td>编码</td>
+                    <td><input id="txtCode" name="Code" style="width:200px;" class="easyui-combobox" required="true"></td>
+                    
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td><input id="txtName" style="width:200px;" name="Name" class="easyui-validatebox" required="true"></td>
+                    <td>模块图标</td>
+                    <td><input name="Icon" style="width:195px;" class="easyui-validatebox"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+<script src="~/Content/Scripts/Admin/SysLimit.js"></script>

@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "../Shared/_LayoutJquery.cshtml";
+}
+@section head{
+<link href="~/Content/Styles/Admin/login.css" rel="stylesheet" />
+<script src="~/Content/Scripts/Admin/login.js"></script>
+<script type="text/javascript">
+    var errors = parseInt("@Sun.Core.Login.LoginFac.Admin.GetErrors()");
+    var canerrors = parseInt("@CustomConfig.loginCanErrors");
+    $(function () {
+        $("body").keydown(function (e) {
+            if (e.which == 13) {
+                if (errors <= canerrors) {
+                    $("#btnSubmit").click();
+                } else {
+                    $("#capchaSubmit").click();
+                }
+            }
+        });
+    });
+</script>
+}
+<body>
+    <div id="container">
+        <form id="loginForm">
+            <input id="captcha" type="hidden" name="captcha" value="" />
+            <div class="login">后台登陆</div>
+            <div class="username-text">账号:<span id="userlabel"></span></div>
+            <div class="password-text">密码:<span id="pwdlabel"></span></div>
+            <div class="username-field">
+                <input type="text" id="txtAccount" name="account" value="账号|邮箱|手机" />
+            </div>
+            <div class="password-field">
+                <input type="password" id="txtPwd" name="password" value="" />
+            </div>
+            <input type="checkbox" name="remember" value="true" id="remember-me" /><label for="remember-me">保存账号信息</label>
+            <div class="forgot-usr-pwd">忘记<a href="#">账号</a>或者<a href="/admin/adminhome/lookpassword/">密码</a>?</div>
+            <input id="btnSubmit" class="btnsubmit" type="button" value="登陆" />
+        </form>
+        <div class="welcome">
+            <div class="welcome-user">账号密码错误次数超过<span>@CustomConfig.loginCanErrors</span>次，请输入<span style="color:red;">验证码</span>!</div>
+            <div class="welcome-text">
+                <img id="CaptchaImg" src="~/Content/Images/Common/capclick.gif" style="vertical-align:middle;float:left;margin-right:40px;" height="50" onclick="reImg()" />
+                <input type="text" id="txtcaptcha" name="captcha" style="background-color:white;height:44px;float:left;margin:0;" />
+                <div style="width:400px;height:1px;background-color:white;float:left;margin:20px 0 0 -24px;"></div>
+                <div id="captchaerror" style="margin-top:1px;font-size:24px;float:left;text-align:center;line-height:24px;width:360px;color:red;display:none;">验证码输入错误</div>
+                <div style="margin-top:10px;font-size:26px;float:left;text-align:center;line-height:30px;width:360px;">@(CustomConfig.WebName)管理中心</div>
+            </div>
+            <div id="capchaSubmit" class="home">登陆</div>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="#" target="_blank" title="SunCMS">@(CustomConfig.WebName)管理中心</a>
+    </div>
+</body>
+

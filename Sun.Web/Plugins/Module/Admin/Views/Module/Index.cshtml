@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+
+@section head{
+    <script type="text/javascript">
+    var pMListStr = '@ViewData["limitsStr"]';
+    var pMList = pMListStr.split(',');
+    </script>
+}
+<body style="width:99%;height:99%;">
+    <table id="ModuleList"></table>
+    <div class="easyui-dialog" id="AddorUpdate" style="padding:10px 10px;width:630px;">
+        <div class="ftitle">模块信息</div>
+        <form id="edit" method="post">
+            <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+                <tr><input type="hidden" name="ModuleId" /><input type="hidden" name="IsUsable" /></tr>
+                <tr>
+                    <td>上级模块</td>
+                    <td colspan="3"><input style="width:416px;" id="ParentId" class="easyui-combotree" name="ParentId" value="0" data-options="required:true"> </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">模块Key</td>
+                    <td colspan="3"><input type="text" id="ModuleKey" name="ModuleKey" style="width:416px;" class="easyui-combobox" data-options="url:'/admin/Module/AdminModuleKeyList/',valueField:'key',textField:'value',panelHeight:'auto'" /></td>
+                </tr>
+                <tr>
+                    <td>模块类型</td>
+                    <td><input style="width:206px;" class="easyui-combobox" id="TypeId" name="TypeId" data-options="url:'/admin/Module/ModuleTypeComboJson/',valueField:'key',textField:'value',panelHeight:'auto',editable:false" required="true"></td>
+                    <td>模块名称</td>
+                    <td><input style="width:210px;" name="Name" class="easyui-validatebox" required="true"></td>
+                </tr>
+                <tr>
+                    <td>模块图标</td>
+                    <td><input style="width:200px;" name="Icon" class="easyui-validatebox"></td>
+                    <td>显示顺序</td>
+                    <td><input style="width:210px;" name="SortIndex" class="easyui-validatebox" value="0" validtype="isInt" required="true"></td>
+                </tr>
+                <tr>
+                    <td>模块地址</td>
+                    <td><input style="width:210px;" name="LinkUrl"></td>
+                    <td>关联值</td>
+                    <td><input style="width:210px;" validtype="length[0,100]" class="easyui-validatebox" name="ModuleValue"></td>
+                </tr>
+                <tr>
+                    <td>标题</td>
+                    <td colspan="3"><input style="width:490px;" class="easyui-validatebox" validtype="length[0,180]" name="Title"> </td>
+                </tr>
+                <tr>
+                    <td>关键字</td>
+                    <td colspan="3"><input style="width:490px;" class="easyui-validatebox" validtype="length[0,180]" name="KeyWords"> </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">摘要</td>
+                    <td colspan="3"><textarea name="Description" class="easyui-validatebox" validtype="length[0,200]" style="width:490px;height:50px;"></textarea></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+<script src="~/Content/Scripts/Admin/SysModule.js"></script>
+<script src="~/Content/Scripts/EasyUI/validateExt.js"></script>
+
+

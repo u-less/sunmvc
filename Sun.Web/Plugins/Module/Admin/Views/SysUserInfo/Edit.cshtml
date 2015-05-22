@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@model UserInfo
+
+<script>
+    var loginid = '@Model.LoginId';
+    $(function () {
+        if ('@Model.Sex' == 'True')
+            $('#SexOne').attr('checked', true);
+        else
+            $('#SexTwo').attr('checked', true);
+        if ('@Model.UserId' != 0)
+            $("#LoginId").attr("readonly", "readonly");
+    });
+</script>
+<div id="detail" class="easyui-panel" title="用户编辑">
+    <form id="editform" method="post">
+        <input type="hidden" id="UserId" value="@Model.UserId" name="UserId" />
+        <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+            <tr>
+                <td width="100px">账号</td>
+                <td width="400px"><input type="text" style="width:206px;" id="LoginId" name="LoginId" value="@Model.LoginId" data-options="required:true" />(长度为6到32位字符数字组合)</td>
+                <td width="100px">姓名</td>
+                <td><input type="text" style="width:206px;" id="UserName" name="UserName" value="@Model.UserName" /></td>
+            </tr>
+            <tr>
+                <td>昵称</td>
+                <td><input type="text" style="width:206px;" id="NickName" name="NickName" value="@Model.NickName" /></td>
+                <td>密码</td>
+                <td><input type="text" style="width:206px;" id="Password" name="Password"/></td>
+            </tr>
+            <tr>
+                <td>所属机构</td>
+                <td><input style="width:210px;" id="OrganId" name="OrganId" value="@Model.OrganIds" required="true"/></td>
+                <td>地区</td>
+                <td><input style="width:210px;" id="RegionId" name="RegionId" value="@Model.RegionId" data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td>用户类别</td>
+                <td><input style="width:210px;" id="UserType" name="UserType" value="@Model.UserType" data-options="required:true" /></td>
+                <td>所属角色</td>
+                <td><input style="width:210px;" id="RoleId" value="@(Model.RoleId == 0 ? "" : Model.RoleId.ToString())" name="RoleId" data-options="required:true"> </td>
+
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td>
+                    <input type="radio" name="Sex" id="SexOne" value="true" /> 男
+                    <input type="radio" name="Sex" id="SexTwo" value="false" /> 女
+                </td>
+                <td>状态</td>
+                <td><input style="width:210px;" id="States" name="States" value="@Model.States" data-options="required:true" /></td>
+            </tr>
+            <tr>
+                <td>电话号码</td>
+                <td><input type="text" style="width:206px;" name="PhoneNumber" value="@Model.PhoneNumber" /></td>
+                <td>邮箱</td>
+                <td><input type="text" style="width:206px;" name="Email" value="@Model.Email" /></td>
+            </tr>
+        </table>
+    </form>
+    <div style="text-align:center;padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+        @if (Model.UserId != 0)
+        {<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">清空</a>}
+    </div>
+</div>
+<div id="organbar"></div>
+<script src="~/Content/Scripts/Admin/SysUserEdit.js"></script>

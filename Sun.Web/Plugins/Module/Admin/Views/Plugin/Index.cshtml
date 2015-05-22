@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<PluginInfo>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Scripts.Render("~/Content/Scripts/sunbase")
+    <link href="~/Content/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/Scripts/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".btnstop").click(function () {
+                var guid = $(this).attr("data-id");
+                $.ajax({
+                    type: "post",
+                    url: '/plugin/stop/?guid=' + guid,
+                    async: false,
+                    success: function (data) {
+                        if (data == true)
+                            location.reload();
+                    }
+                });
+            });
+            $(".btnunload").click(function () {
+                var guid = $(this).attr("data-id");
+                $.ajax({
+                    type: "post",
+                    url: '/plugin/unload/?guid=' + guid,
+                    async: false,
+                    success: function (data) {
+                        if(data==true)
+						  location.reload();
+                    }
+                });
+            });
+            $(".btnStart").click(function () {
+                var guid = $(this).attr("data-id");
+                $.ajax({
+                    type: "post",
+                    url: '/plugin/start/?guid=' + guid,
+                    async: false,
+                    success: function (data) {
+                        if(data==true)
+						  location.reload();
+                    }
+                });
+            });
+            $(".ziptest").click(function () {
+                $.ajax({
+                    type: "post",
+                    url: '/plugin/ExtractZip/',
+                    async: false,
+                    success: function (data) {
+                        if(data==true)
+						  location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    @{Html.RenderAction("navpart", "plugin", new {area = "admin",areaname = "admin",id = Convert.ToInt32(ViewData["id"]) });}
+	<div class="row">
+		@{
+			foreach (var plugin in Model)
+			{
+				<div class="col-sm-6 col-md-4">
+					<div class="panel panel-default ">
+						<div class="panel-heading">@plugin.NickName
+						@{
+							if (plugin.Status == PluginStatus.Usable)
+							{
+								<span class="label label-success">已启用</span>
+							}
+							else
+							{
+								if (plugin.Status == PluginStatus.Stop)
+								{
+									<span class="label label-default">已停用</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger">异常</span>
+                                }
+                            }
+                        }</div>
+						<div class="panel-body">
+							@plugin.Intro<br />
+							<div class="btn-group" role="group" aria-label="...">
+								@if (plugin.Status == PluginStatus.Usable)
+								{
+									<button type="button" class="btn btn-default btnstop" data-id="@plugin.Guid">停用</button>
+								}
+								else
+								{
+									<button type="button" class="btn btn-default btnStart" data-id="@plugin.Guid">启用</button>
+								}
+								<button type="button" class="btn btn-default btnunload" data-id="@plugin.Guid">卸载</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		}
+	</div>
+</div>
+</body>
+</html>

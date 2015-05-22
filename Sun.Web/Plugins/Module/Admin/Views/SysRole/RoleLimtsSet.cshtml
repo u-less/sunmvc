@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "RoleLimtsSet";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@{
+    @model int?
+}
+<script type="text/javascript">
+    var roleId = '@Model';
+    var limitsStr = '@ViewData["limitsStr"]';
+    var Limits = limitsStr.split(',');
+</script>
+<body style="width:99%;height:99%;">
+    <table id="Limits"></table>
+</body>
+<script src="~/Content/Scripts/admin/RoleLimitsSet.js"></script>

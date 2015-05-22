@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@section head{
+    <script type="text/javascript">
+    var pMListStr = '@ViewData["limitsStr"]';
+        var pMList = pMListStr.split(',');
+        var nowtime = '@DateTime.Now.ToString("HH:mm:ss")';
+        var fileUrl = '@CustomConfig.FileUpUrl';
+        var fileExts = "@string.Join(",", CustomConfig.ImgExts.Select(s=>s.TrimStart('.')))";
+    </script>
+}
+<body style="width:99%;height:99%;">
+    <table id="confset"></table>
+    <div id="ruleDetail" style="padding:10px;">
+    </div>
+    <div class="easyui-dialog" id="uploadwindow" style="padding:10px 10px;width:630px;">
+        <form id="uploadform" method="post" action="">
+            <div id="uploader">
+                <p>你的浏览器不支持 Flash,Silverlight,HTML5.</p>
+            </div>
+            <br />
+        </form>
+    </div>
+</body>
+<script src="~/Content/Scripts/Admin/WebConfigSet.js"></script>
+<script src="~/Content/Scripts/Ueditor/ueditor.config.js"></script>
+<script src="~/Content/Scripts/Ueditor/ueditor.all.min.js"></script>
+<script src="~/Content/Scripts/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<link href="~/Content/Scripts/upload/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet" />
+<script src="~/Content/Scripts/upload/plupload.full.min.js"></script>
+<script src="~/Content/Scripts/upload/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+<script src="~/Content/Scripts/upload/zh_CN.js"></script>
+<style type="text/css">
+    .edui-editor-toolbarboxinner {white-space:normal} 
+</style>
