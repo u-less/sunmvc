@@ -1,0 +1,103 @@
+﻿
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, u, s, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, th { border:0; font-size:100%; margin:0; padding:0; list-style:none outside none; text-decoration:none; font-weight:normal; font-style:normal;}
+
+td{ padding-left:3px;}
+input{ vertical-align:middle;}
+
+.top {
+height: 90px;
+background: #b6dff1 url(../../../Content/Images/Admin/topbg.jpg) no-repeat;
+}
+
+.top img {
+margin: 3px 0 0 5px;
+float: left;
+}
+
+.top .top_right {
+width: 577px;
+height: 94px;
+float: right;
+}
+
+.top .top_right .clock {
+height: 45px;
+line-height: 34px;
+padding-right: 20px;
+margin-top: 5px;
+text-align: right;
+background: url(../../../Content/images/admin/clock.png) no-repeat 0px 0px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 15px;
+color: #fff;
+}
+
+.top .top_right .wz {
+display: block;
+height: 42px;
+color: #fff;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+text-align:right;
+padding-right:20px;
+}
+
+.top .top_right .wz u {
+font-size: 16px;
+}
+
+.top .top_right .wz a {
+text-decoration: underline;
+color: #0689e3;
+font-weight: bold;
+}
+
+.menu_tree {
+background: url(../../../Content/Images/Admin/left-yy.gif) no-repeat 0 -100px;
+}
+
+.menu_tree ul {
+padding-left: 16px;
+}
+
+.menu_tree ul li {
+height: 42px;
+line-height: 42px;
+border-bottom: 1px solid #d0d9e3;
+}
+
+.menu_tree ul li div {
+width: 25px;
+height: 42px;
+margin: 0 10px 0 10px;
+float: left;
+}
+
+.menu_tree ul li a {
+display: block;
+color: #0689e3;
+}
+
+.menu_tree ul li a:hover {
+background-color: #daeffd;
+}
+
+.menu_tree ul li.hover {
+background-color: #daeffd;
+}
+
+.menu_tree ul li a:visited {
+color: #0689e3;
+}
+#topmenuwrap a{margin-left:5px;}
+.user-info {
+overflow: hidden;
+position: relative;
+display: block;
+float:right;
+height: 51px;
+width: 70px;
+padding: 14px 22px;
+border-top: 1px solid transparent;
+border-bottom: 1px solid #CCC;
+}

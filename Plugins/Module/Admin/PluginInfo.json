@@ -1,0 +1,14 @@
+﻿{
+    'Guid': '2304e992-d781-4d04-8504-2d4e45c4e58f',
+    'Type': 'Module',
+    'Areas': { 'ddd': '','admin': '','one': '/Areas/one' ,'testtwo':'/Areas/testtwo'},
+    'GroupName': '',
+    'NickName': 'sun后台框架',
+    'Version': '1.0.0.0',
+    'Author': 'zzh',
+    'AssemblyNames':['Plugin.Admin.dll','Sun.Model.dll','Sun.BaseOperate.dll'],
+    'Status':4,
+    'SortIndex': 1,
+	 'Config':'',
+    'Intro': '把独立网站作为插件进行加载，这个是测试插件'
+}

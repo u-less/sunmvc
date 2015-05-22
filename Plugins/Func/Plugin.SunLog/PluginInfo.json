@@ -1,0 +1,15 @@
+﻿{
+	'Guid':'f6fc61b5-2314-4149-aebb-3de0eb83221e',
+    'Type': 'Func',
+    'GroupName': 'Cache',
+    'NickName': 'sunlog',
+    'Version': '1.0.0.0',
+    'Author': 'zzh',
+    'AssemblyNames': [
+        'Plugin.SunLog.dll'
+    ],
+    'Status': 1,
+    'SortIndex': 1,
+    'Config': '{ "ConnectionName":"fangbase","EmailLevel":"2"}',
+    'Intro': ''
+}

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@model ConfigInfo
+<div id="edit" class="easyui-panel" title="配置项编辑">
+    <form id="editform" method="post">
+        <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+            <tr><td colspan="4"><input id="configId" type="hidden" name="ConfigId" value="@Model.ConfigId" /></td></tr>
+            <tr>
+                <td style="width:60px;">唯一键</td>
+                <td style="width:230px;"><input style="width:206px;" id="CKey" name="CKey" @if(Model.ConfigId != 0) { <text> readonly="readonly" </text>  } value="@Model.CKey" class="easyui-validatebox" data-options="required:true"  invalidmessage="Key已经存在"></td>
+                <td style="width:60px;">配置名称</td>
+                <td style="width:230px;"><input style="width:210px;" name="KeyName" value="@Model.KeyName" class="easyui-validatebox" data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td>配置组</td>
+                <td><input id="CGroup" style="width:211px;" name="CGroup" value="@(Model.CGroup==0?"":Model.CGroup.ToString())" required="true"></td>
+                <td>配置类型</td>
+                <td><input id="CType" style="width:215px;" name="CType" value="@Model.CType" required="true"></td>
+            </tr>
+            <tr>
+                <td>验证设置</td>
+                <td><input style="width:209px;" name="ValidType" value="@Model.ValidType"></td>
+                <td>锁定值</td>
+                <td><input type="radio" @if (Model.Lock == true) { <text> checked="checked" </text>    } name="Lock" value="true" />锁定<input type="radio" name="Lock" @if (Model.Lock != true) { <text> checked="checked" </text>    } value="false" />未锁定</td>
+            </tr>
+            <tr>
+                <td>默认值</td>
+                <td colspan="3"><textarea style="width:1200px;height:50px;" name="CValue" class="easyui-validatebox">@Model.CValue</textarea></td>
+            </tr>
+            <tr><td>规则说明</td><td colspan="3"><textarea style="width:1200px;height:50px;" name="CRule" class="easyui-validatebox" data-options="required:true">@Model.CRule</textarea></td></tr>
+        </table>
+    </form>
+    <div style="text-align:center;padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+        @if (Model.ConfigId == 0)
+        {<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#edit').form('clear')">清空</a>}
+    </div>
+</div>
+<script src="~/Content/Scripts/EasyUI/validateExt.js"></script>
+<script src="~/Content/Scripts/Admin/WebConfigEdit.js"></script>

@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@model Sun.Model.DBExtensions.UserGrid
+<div id="detail" class="easyui-panel" title="用户详情">
+    <form id="editform" method="post">
+        <input type="hidden" value="@Model.UserId" name="UserId" /><input value="@Model.Password" type="hidden" name="Password" />
+        <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+            <tr>
+                <td>用户账号</td>
+                <td><input type="text" id="txtloginId" name="LoginId" value="@Model.LoginId" readonly="readonly" /></td>
+                <td rowspan="4">头像</td>
+                <td rowspan="4"><image src="@Model.HeadPictrue" onload="javascript: DrawImage(this, 80, 120)" width="80" height="120" /></td>
+            </tr>
+            <tr>
+                <td>所属机构</td>
+                <td><input type="text" value="@Model.OrganName" readonly="readonly" /></td>
+                <td>所属角色</td>
+                <td><input type="text" value="@Model.RoleName" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td><input type="text" name="UserName" value="@Model.UserName" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td><input type="text" name="Sex" value="@(Model.Sex?"男":"女")" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>注册时间</td>
+                <td><input type="text" name="CallNumber" value="@Model.AddTime.ToString("yyyy-MM-dd HH:mm:ss")" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>生日</td>
+                <td><input type="text" name="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")" readonly="readonly" /></td>
+                <td>身份证</td>
+                <td><input type="text" name="IdentityId" value="@Model.IdentityId" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>电话号码</td>
+                <td><input type="text" name="PhoneNumber" value="@Model.PhoneNumber" readonly="readonly" /></td>
+                <td>座机号码</td>
+                <td><input type="text" name="CallNumber" value="@Model.CallNumber" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="Email" value="@Model.Email" readonly="readonly" /></td>
+                <td>QQ</td>
+                <td><input type="text" name="QQ" value="@Model.QQ" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>最后登录时间</td>
+                <td><input type="text" name="LastLoginTime" value="@Model.LastLoginTime.ToString("yyyy-MM-dd HH:mm:ss")" readonly="readonly" /></td>
+                <td>最后登录IP</td>
+                <td><input type="text" name="LastLoginIp" value="@Model.LastLoginIp" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td colspan="3"><input type="text" name="Address" value="@Model.Address" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>状态</td>
+                <td colspan="3"><input type="text" name="States" value="@(Model.States==1?"正常":"冻结")" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>是否绑定Email</td>
+                <td><input type="text" name="IsBindEmail" value="@(Model.IsBindEmail == true ? "是" : "否")" readonly="readonly" /></td>
+                <td>是否绑定手机</td>
+                <td><input type="text" name="IsBindPhone" value="@(Model.IsBindPhone == true ? "是" : "否")" readonly="readonly" /></td>
+            </tr>
+        </table>
+    </form>
+</div>

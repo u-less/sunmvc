@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@section head{
+    <script type="text/javascript">
+        var limitsStr = '@ViewData["limitsStr"]';
+        var limits = limitsStr.split(',');
+    </script>
+}
+<body style="width:99%;height:99%;">
+    <table id="List"></table>
+
+    <div class="easyui-dialog" id="AddorUpdate" style="padding:10px 10px;width:640px;">
+        <div class="ftitle">字典数据类型信息</div>
+        <form id="edit" method="post">
+            <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+                <tr><input type="hidden" name="DictId" /><input type="hidden" name="TypeId" /><input type="hidden" name="IsUsable" /></tr>
+                <tr>
+                    <td>名称</td>
+                    <td><input style="width:210px;" name="DictName" class="easyui-validatebox" data-options="required:true"></td>
+                    <td>标识</td>
+                    <td><input style="width:210px;" name="Code" class="easyui-validatebox" data-options="required:true"></td>
+                </tr>
+                <tr>
+                    <td>值</td>
+                    <td><input style="width:200px;" name="DataValue" class="easyui-validatebox" validtype="length[1,29]" data-options="required:false"></td>
+                    <td>显示顺序</td>
+                    <td><input style="width:210px;" name="SortIndex" class="easyui-validatebox" value="0" validtype="isInt" required="true"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+<script src="~/Content/Scripts/library.js"></script>
+<script src="~/Content/Scripts/Admin/SysDictType.js"></script>
+<script src="~/Content/Scripts/EasyUI/validateExt.js"></script>
+
+

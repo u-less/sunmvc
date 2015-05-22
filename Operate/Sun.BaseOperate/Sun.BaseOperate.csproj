@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{491200EA-05DE-454C-AE7E-3828626852FA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sun.BaseOperate</RootNamespace>
+    <AssemblyName>Sun.BaseOperate</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\CommonConfig.cs" />
+    <Compile Include="Config\MobileEmail.cs" />
+    <Compile Include="Config\TickConfig.cs" />
+    <Compile Include="Config\UploadConfig.cs" />
+    <Compile Include="DbContext\Context.cs" />
+    <Compile Include="DbContext\DbConnection.cs" />
+    <Compile Include="DB\CacheOp.cs" />
+    <Compile Include="DB\ConfigOp.cs" />
+    <Compile Include="DB\ConfigOptionOp.cs" />
+    <Compile Include="DB\DictOp.cs" />
+    <Compile Include="DB\LimitOp.cs" />
+    <Compile Include="DB\ModuleLimit.cs" />
+    <Compile Include="DB\ModuleOp.cs" />
+    <Compile Include="DB\OrganOp.cs" />
+    <Compile Include="DB\RoleLimitOp.cs" />
+    <Compile Include="DB\RoleOp.cs" />
+    <Compile Include="DB\UserInfoOp.cs" />
+    <Compile Include="Interface\IConfigOp.cs" />
+    <Compile Include="Interface\IConfOptionOp.cs" />
+    <Compile Include="Interface\ILimitOp.cs" />
+    <Compile Include="Interface\IModuleOp.cs" />
+    <Compile Include="Interface\IDictOp.cs" />
+    <Compile Include="Interface\IOrganOp.cs" />
+    <Compile Include="Interface\IRoleLimitOp.cs" />
+    <Compile Include="Interface\IRoleOp.cs" />
+    <Compile Include="Interface\IUserInfoOp.cs" />
+    <Compile Include="Login\AdminLogin.cs" />
+    <Compile Include="Login\LoginUser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Model\Sun.Model\Sun.Model.csproj">
+      <Project>{40998e80-7178-4f95-a83a-df8df9e5589c}</Project>
+      <Name>Sun.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sun.Core\Sun.Core.csproj">
+      <Project>{b07302e6-e250-4e66-8d14-5e586fbea0d4}</Project>
+      <Name>Sun.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sun.Framework\Sun.Framework.csproj">
+      <Project>{e3bed567-d1d1-42ed-9704-b2c8c0a5ec35}</Project>
+      <Name>Sun.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

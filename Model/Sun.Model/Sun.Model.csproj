@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{40998E80-7178-4F95-A83A-DF8DF9E5589C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sun.Model</RootNamespace>
+    <AssemblyName>Sun.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ConfElementType.cs" />
+    <Compile Include="Common\GridPage.cs" />
+    <Compile Include="Common\KeyValue.cs" />
+    <Compile Include="Common\SEOInfo.cs" />
+    <Compile Include="Common\SinglePage.cs" />
+    <Compile Include="Common\UserStatus.cs" />
+    <Compile Include="Common\UserType.cs" />
+    <Compile Include="DBExtensions\AdminLoginModel.cs" />
+    <Compile Include="DBExtensions\BannerGrid.cs" />
+    <Compile Include="DBExtensions\LimitAoutRole.cs" />
+    <Compile Include="DBExtensions\LimitModuleName.cs" />
+    <Compile Include="DBExtensions\ModuleAoutRole.cs" />
+    <Compile Include="DBExtensions\ModuleSEO.cs" />
+    <Compile Include="DBExtensions\ModuleTypeName.cs" />
+    <Compile Include="DBExtensions\OrganGrid.cs" />
+    <Compile Include="DBExtensions\RoleAdminName.cs" />
+    <Compile Include="DBExtensions\SimpleNews.cs" />
+    <Compile Include="DBExtensions\SimpleUser.cs" />
+    <Compile Include="DBExtensions\UserGrid.cs" />
+    <Compile Include="DBExtensions\UserHeadInfo.cs" />
+    <Compile Include="DBExtensions\ConfigGrid.cs" />
+    <Compile Include="DBExtensions\ConfigSet.cs" />
+    <Compile Include="DBExtensions\ConfigOptionGrid.cs" />
+    <Compile Include="DBExtensions\WebLinksGrid.cs" />
+    <Compile Include="DBExtensions\WebLoginModel.cs" />
+    <Compile Include="DB\CacheInfo.cs" />
+    <Compile Include="DB\FansInfo.cs" />
+    <Compile Include="DB\PicStore.cs" />
+    <Compile Include="DB\Module.cs" />
+    <Compile Include="DB\Dict.cs" />
+    <Compile Include="DB\Limit.cs" />
+    <Compile Include="DB\Organ.cs" />
+    <Compile Include="DB\Region.cs" />
+    <Compile Include="DB\Role.cs" />
+    <Compile Include="DB\Rolelimit.cs" />
+    <Compile Include="DB\UserDetail.cs" />
+    <Compile Include="DB\UserInfo.cs" />
+    <Compile Include="DB\UserPoint.cs" />
+    <Compile Include="DB\Banner.cs" />
+    <Compile Include="DB\ConfigInfo.cs" />
+    <Compile Include="DB\ConfigOption.cs" />
+    <Compile Include="DB\Links.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sun.Core\Sun.Core.csproj">
+      <Project>{b07302e6-e250-4e66-8d14-5e586fbea0d4}</Project>
+      <Name>Sun.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

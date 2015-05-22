@@ -1,0 +1,237 @@
+﻿
+@{
+    Layout = null;
+    var id = Convert.ToInt32(ViewData["id"]);
+}
+@model IEnumerable<System.IO.FileInfo>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>zips</title>
+    @Scripts.Render("~/Content/Scripts/sunbase")
+    <link href="~/Content/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/Scripts/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/Scripts/upload/plupload.full.min.js"></script>
+    <script src="~/Content/Scripts/upload/zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#zip-navs li").eq(@id).addClass("active");
+            var uploader = new plupload.Uploader({
+                runtimes: 'html5,flash,silverlight,html4',
+                browse_button: 'fileselect',
+                container: document.getElementById('zipwrap'),
+                url: '/plugin/UploadPlugin/',
+                flash_swf_url: '../js/Moxie.swf',
+                silverlight_xap_url: '../js/Moxie.xap',
+                filters: {
+                    max_file_size: '20M',
+                    mime_types: [
+                        { title: "Images", extensions:'zip' }
+                    ]
+                },
+                init: {
+                    PostInit: function () {
+                        $("#fileName").val('');
+                    },
+                    FilesAdded: function (up, files) {
+                        plupload.each(files, function (file) {
+                            $("#lblogo").html(file.name + ' (' + plupload.formatSize(file.size) + ')');
+                        });
+                        $("#fileUpload").show();
+                        $("#fileUpload").click(function () { uploader.start(); });
+                    },
+                    FileUploaded: function (up, file, info) {
+                        if (info.response == "true") {
+                            $("#fileName").val(file.name);
+                            $("#lblogo").html("插件" + file.name + "上传成功");
+                            location.reload();
+                        } else {
+                            $("#lblogo").html('错误(' + info.response + ')');
+                        }
+                    },
+                    UploadProgress: function (up, file) {
+                        $("#lblogo").html('正在上传(' + file.percent + '%)');
+                    },
+                    Error: function (up, err) {
+                        $("#lblogo").html('错误(' + err.code + ':' + err.message + ')');
+                    }
+                }
+            });
+            uploader.init();
+            $(".btnInstall").click(function () {
+                var fileName = $(this).attr("data-name");
+                $.ajax({
+                    type: "post",
+                    url: '/plugin/InstallZip/',
+                    data: { name: fileName },
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            location.reload();
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+            });
+            $(".btnRegister").click(function () {
+                var fileName = $(this).attr("data-name");
+                $.ajax({
+                    type: "post",
+                    url: '/plugin/Register/',
+                    data: { name: fileName },
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            location.reload();
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+            });
+            $(".btnDelete").click(function () {
+                var fileName = $(this).attr("data-name");
+                $.ajax({
+                    type: "post",
+                    url: '/plugin/DeleteZip/',
+                    data: { name: fileName },
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            location.reload();
+                        } else {
+                            alert(data);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        @*@Html.Action("navpart", "admin/plugin", new {area = "admin",areaname = "admin",id = 4})*@
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav top-nav">
+                    <li><a href="/plugin/index/0/">全部插件</a></li>
+                    <li><a href="/plugin/index/1/">启用插件</a></li>
+                    <li><a href="/plugin/index/2/">未启用插件</a></li>
+                    <li><a href="/plugin/index/3/">异常插件</a></li>
+                    <li><a href="/plugin/zips/">插件包管理</a></li>
+                </ul>
+            </div>
+        </nav>
+        <script type="text/javascript">$(function () { $(".top-nav li").eq(@ViewData["id"]).addClass("active"); });</script>
+        <ul id="zip-navs" class="nav nav-tabs">
+            <li role="presentation"><a class="zip-nav" href="/plugin/zips/">全部</a></li>
+            <li role="presentation"><a class="zip-nav" href="/plugin/zips/1/">未安装</a></li>
+            <li role="presentation"><a class="zip-nav" href="/plugin/zips/2/">未注册</a></li>
+            <li role="presentation" id="zipwrap">
+                <button type="button" id="fileselect" class="btn btn-primary" style="margin-left:5px;float:left;">选择</button>
+                <div id="lblogo" class="alert alert-success" style="padding:5px;float:left;">未选择插件包</div>
+                <button type="button" id="fileUpload" style="margin-left:5px;display:none;float:left;" class="btn btn-primary ">上传</button>
+            </li>
+        </ul>
+        <div class="row" style="margin-top:10px;">
+            @{
+                IZipManage zipManage = WebIoc.Container.Resolve<IZipManage>();
+                IManage manage = WebIoc.Container.Resolve<IManage>();
+                var zipInfos=zipManage.GetPluginZips();
+                var plugins=manage.GetPlugins().ToList();
+                var files=Model;
+                if (id == 1)
+                {
+                    files = Model.Where(f =>{var zipInfo = zipInfos.SingleOrDefault(z => z.ZipName == f.Name); return zipInfo !=null&&plugins.SingleOrDefault(p =>p.Guid==zipInfo.Guid)==null;});
+                }
+                if (id == 2)
+                {
+                    files = Model.Where(f=>zipInfos.SingleOrDefault(z => z.ZipName == f.Name)==null);
+                }
+                foreach (var file in files)
+                {
+                    PluginInfo plugin=null;
+                    <div class="col-sm-6 col-md-4">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">
+                            @file.Name
+                            @{
+                                var info =zipInfos.SingleOrDefault(z=>z.ZipName==file.Name);
+                                if (info!=null)
+                                {
+                                    <span class="label label-success">已注册</span>
+                                    plugin = plugins.SingleOrDefault(p => p.Guid == info.Guid);
+                                    if (plugin != null)
+                                    {
+                                        if (plugin.Status == PluginStatus.NeedUnload)
+                                        {
+                                            <span class="label label-info">卸载待重启</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-success">已安装</span>
+                                        }
+                                        if (plugin.Status == PluginStatus.Error)
+                                        {
+                                        <span class="label label-Danger">异常</span>
+                                        }
+                                    }else
+                                    {
+                                        <span class="label label-default">未安装</span>
+                                    }
+                                  }
+                                else
+                                {
+                                    <span class="label label-default">未注册</span>
+                                }
+                               }
+                           </div>
+                        <div class="panel-body" style="min-height:180px;">
+                            @if(info!=null)
+                            {
+                                <div>
+                                    Guid:@info.Guid <br />
+                                    Version:@info.Version <br />
+                                    @if(plugin!=null)
+                                    {
+                                   <div>
+                                       已安装Version:@plugin.Version <br />
+                                       介绍:@plugin.Intro<br />
+                                   </div>
+                                    }
+                                </div>
+                            }else{
+                                <div>无法获取插件信息</div>
+                            }
+                            <div class="btn-group" role="group" style="margin-top:15px;">
+                                @if (info != null)
+                                {
+                                    if (plugin == null)
+                                    {
+                                        <button type="button" class="btn btn-default btnstop btnInstall" data-name="@info.ZipName">安装插件</button>
+                                    }
+                                    else
+                                    {
+                                        if (plugin.Status == PluginStatus.NeedUnload)
+                                        {
+                                            <button type="button" class="btn btn-default btnstop btnInstall" data-name="@info.ZipName">安装插件[需重启]</button>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-default btnStart btnRegister" data-name="@file.Name">注册</button>
+                                }
+                                <button type="button" class="btn btn-default btnunload btnDelete" data-name="@file.Name">删除</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                }
+        </div>
+    </div>
+</body>
+</html>

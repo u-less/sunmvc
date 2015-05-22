@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@model Organ
+<div id="edit" class="easyui-panel" title="机构编辑">
+    <form id="editform" method="post">
+        <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+            <tr><td colspan="4"><input type="hidden" id="OrganId" name="OrganId" value="@Model.OrganId" /><input type="hidden" name="State" value="@(Model.OrganId==0? 1 : Model.State)" /></td></tr>
+            <tr>
+                <td>机构名称</td>
+                <td><input style="width:206px;" id="OrganName" name="OrganName" value="@(Model.OrganName == null ? "" :Model.OrganName)" class="easyui-validatebox" data-options="required:true"></td>
+                <td>上级机构</td>
+                <td><input id="ParentId" style="width:210px;" name="ParentId" value="@((Model.ParentId == 0 && Model.OrganId == 0) ? "" : Model.ParentId.ToString())" class="easyui-validatebox" data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td>机构类别</td>
+                <td><input style="width:210px;" class="easyui-combobox" id="TypeId" name="TypeId" value="@(Model.TypeId == 0 ? "" : Model.TypeId.ToString())" data-options="url:'/SysOrgan/OrganTypeComboJson/',valueField:'key',textField:'value',editable: false" required="true"></td>
+                <td>机构等级</td>
+                <td colspan="3"><input style="width:206px;" class="easyui-combobox" id="Level" name="Level" value="@(Model.Level == 0 ? "" : Model.Level.ToString())" data-options="url:'/SysOrgan/OrganLevelComboJson/',valueField:'key',textField:'value',editable: false" required="true"></td>
+            </tr>
+        </table>
+    </form>
+    <div style="text-align:center;padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+        @if(Model.OrganId!=0){<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#edit').form('clear')">清空</a>}
+    </div>
+</div>
+<div id="tb"></div>>
+<script src="~/Content/Scripts/Admin/SysOrganEdit.js"></script>

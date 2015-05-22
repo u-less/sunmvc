@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@model Sun.Model.DBExtensions.ConfigOptionGrid
+<div id="edit" class="easyui-panel" title="配置内容编辑">
+    <form id="editform" method="post">
+        <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+            <tr><td colspan="4"><input id="OptionId" type="hidden" name="OptionId" value="@Model.OptionId" /></td></tr>
+            <tr>
+                <td>配置组</td>
+                <td><input id="GroupId" style="width:211px;" name="GroupId" value="@(Model.CGroup == 0 ? "" : Model.CGroup.ToString())" required="true"></td>
+                <td>配置项</td>
+                <td><input id="ConfigId" style="width:215px;" name="ConfigId" value="@(Model.ConfigId == 0 ? "" : Model.ConfigId.ToString())" required="true"></td>
+            </tr>            
+            <tr>
+                <td>内容名称</td>
+                <td><input style="width:206px;" name="OptionName" value="@Model.OptionName" class="easyui-validatebox" data-options="required:true"></td>
+                <td>值</td>
+                <td><input style="width:210px;" name="Values" value="@Model.Values" class="easyui-validatebox" data-options="required:true"></td>
+            </tr>
+        </table>
+    </form>
+    <div style="text-align:center;padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+        @if (Model.OptionId == 0)
+        {<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#edit').form('clear')">清空</a>}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#ConfId").combobox({
+             url: '/admin/WebConfig/GetConfComboxByGroupId/?groupid=@Model.CGroup'
+        })
+    })
+</script>
+<script src="~/Content/Scripts/EasyUI/validateExt.js"></script>
+<script src="~/Content/Scripts/Admin/WebConfOptionEdit.js"></script>

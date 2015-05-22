@@ -1,0 +1,15 @@
+﻿{
+	'Guid':'10d97180-ce62-4dc5-b6ab-77d8601ab12a',
+    'Type': 'Func',
+    'GroupName': 'Cache',
+    'NickName': 'Redis缓存',
+    'Version': '1.0.0.0',
+    'Author': 'zzh',
+    'AssemblyNames': [
+        'Plugin.RedisCache.dll','StackExchange.Redis.dll'
+    ],
+    'Status': 1,
+    'SortIndex': 1,
+    'Config': '[{"Name": "session","DataBase": "0","Hosts": "127.0.0.1: 29999","CacheExpireMinutes": 30},{"Name": "datas","DataBase": "0","Hosts": "127.0.0.1: 29999","CacheExpireMinutes": 30}]',
+    'Intro': ''
+}

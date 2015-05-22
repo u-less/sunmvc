@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/Scripts/easyui/themes/default/style")
+    <link href="~/Content/Scripts/easyui/themes/icon.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Content/Scripts/easyui/jquery.easyui.min.js"></script>
+    @Scripts.Render("~/Content/Scripts/easyuiext/")
+    @RenderSection("head", false)
+</head>
+    @RenderBody()
+</html>

@@ -1,0 +1,15 @@
+﻿@model int
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav top-nav">
+            <li><a href="/plugin/index/0/">全部插件</a></li>
+            <li><a href="/plugin/index/1/">启用插件</a></li>
+            <li><a href="/plugin/index/2/">未启用插件</a></li>
+            <li><a href="/plugin/index/3/">异常插件</a></li>
+            <li><a href="/plugin/zips/">插件包管理</a></li>
+        </ul>
+    </div>
+</nav>
+<script type="text/javascript">$(function () { $(".top-nav li").eq(@Model).addClass("active"); });</script>
+
+

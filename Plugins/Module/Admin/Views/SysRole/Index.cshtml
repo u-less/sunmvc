@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@section head{
+    <script type="text/javascript">var pMListStr = '@ViewData["limitsStr"]';var pMList = pMListStr.split(',');</script>
+}
+<body style="width:99%;height:99%;" data-super="@(CustomConfig.SuperRoleId==Sun.Core.Login.LoginFac.Admin.GetLoginInfo().RoleId)">
+    <table id="RoleList"></table>
+    <div id="organbar"></div>
+    <div class="easyui-dialog" id="AddorUpdate" style="padding:10px 10px;width:590px;">
+        <div class="ftitle">角色管理</div>
+        <form id="edit" method="post">
+            <table class="dv-table" style="width:100%;border:1px solid #ccc;padding:5px;">
+                <tr><input type="hidden" name="RoleId" /><input type="hidden" name="IsUsable" /></tr>
+                <tr>
+                    <td>角色名称</td>
+                    <td><input style="width:200px;" name="Name" class="easyui-validatebox"></td>
+                    <td>所属机构</td>
+                    <td><input style="width:210px;" id="OrganId" name="OrganId" value="0" required="true" /></td>
+                </tr>
+                <tr>
+                    <td>显示顺序</td>
+                    <td><input style="width:200px;" name="SortIndex" class="easyui-validatebox" value="0" validtype="isInt" required="true"></td>
+                    <td>状态</td>
+                    <td> 可用：<input type="checkbox" name="IsUsable" class="easyui-validatebox" value="true" required="true" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+<script src="~/Content/Scripts/Admin/SysRole.js"></script>
+

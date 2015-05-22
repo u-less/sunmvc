@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutAdmin.cshtml";
+}
+@section head{
+    <script type="text/javascript">
+    var pMListStr = '@ViewData["limitsStr"]';
+    var pMList = pMListStr.split(',');
+    </script>
+}
+<body style="width:99%;height:99%;">
+    <table id="List"></table>
+</body>
+<script src="~/Content/Scripts/library.js"></script>
+<script src="~/Content/Scripts/Admin/WebConfOption.js"></script>
+<script src="~/Content/Scripts/EasyUI/validateExt.js"></script>
